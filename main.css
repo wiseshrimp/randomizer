@@ -1,0 +1,36 @@
+body {
+    display: block;
+    font-family: Courier New, Courier, monospace;
+    font-size: 13px;
+    height: 100%;
+    width: 100%;
+}
+
+select {
+    margin: 0 0 10px 0;
+}
+
+.button {
+    border: 1px solid #f069ff;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #f069ff;
+    cursor: pointer;
+    margin: 10px 0;
+    padding: 3px;
+    width: fit-content;
+}
+
+.header1 {
+    color: #f069ff;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header2 {
+    font-weight: bold;
+}
+
+.group {
+    display: flex;
+    margin: 10px 0;
+}
