@@ -7,12 +7,24 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="main.css">
-        <script src="data.js"></script>
     </head>
-    <body onload="populate()">
+    <body>
         <div class="main">
             <div id="people-data">
                 <div class="header1">people:</div>
+            </div>
+            <div class="add-person">
+                <div class="header2">add a person?</div>
+                name: <input id="new-person-name">
+                medium: <select id="new-person-medium">
+                    <option value="poetry">poetry</option>
+                    <option value="comedy">comedy</option>
+                    <option value="visual">visual</option>
+                    <option value="coding">coding</option>
+                    <option value="writing">writing</option>
+                    <option value="video">video</option>
+                </select>
+                <div id="add-person-btn" class="button">add bitch</div>
             </div>
             <div class="header1">prompt:</div>
             <div id="randomize-button" class="button">
@@ -39,6 +51,7 @@
             <div id="crackathon" class="button">lets do this</div>
             <div id="crackathon-results"></div>
         </div>
+        <script src="data.js"></script>
         <script src="main.js"></script>
     </body>
 </html>

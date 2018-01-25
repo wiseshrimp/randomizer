@@ -130,3 +130,18 @@ class Randomizer {
 //     isDiversified: true,
 //     isRepeated: false
 // })
+
+var hasChanged = false
+
+function fetchData () {
+    fetch('/users')
+    .then(res => res.json())
+        .then(res => {
+        data = res
+        if (!hasChanged) {
+            populate()
+        }
+    })
+}
+
+fetchData()

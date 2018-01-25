@@ -20,6 +20,13 @@ select {
     width: fit-content;
 }
 
+.delete {
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+}
+
 .header1 {
     color: #f069ff;
     font-size: 20px;
@@ -33,4 +40,13 @@ select {
 .group {
     display: flex;
     margin: 10px 0;
+}
+
+.name {
+    margin-right: 10px;
+}
+
+.person {
+    display: flex;
+    margin: 10px 5px;
 }
