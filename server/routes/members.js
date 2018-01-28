@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const db = require('../../db')
-const Member = db.model('members')
+// const db = require('../../db')
+const Member = global.db.model('members')
 
 const success = {response: 'success'}
 
