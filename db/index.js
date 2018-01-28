@@ -5,7 +5,7 @@ const Promise = require('bluebird')
 const { Client } = require('pg')
 
 const dbName = 'pilates'
-const url = `postgres://localhost:5432/${dbName}`
+// const url = `postgres://localhost:5432/${dbName}`
 
 const url = process.env.DATABASE_URL || `postgres://localhost:5432/${name}`
 
