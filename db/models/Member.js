@@ -14,4 +14,18 @@ const Member = global.db.define('members', {
   }
 })
 
-module.exports = Member
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define('members', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    medium: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    updated_at: {
+      type: Sequelize.DATE
+    }
+  })
+}
