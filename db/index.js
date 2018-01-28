@@ -38,6 +38,7 @@ const Member = sequelize.define('members', {
     type: Sequelize.DATE
   }
 })
+Member.sync()
 const db = global.db = {
   Sequelize: Sequelize,
   sequelize: sequelize
