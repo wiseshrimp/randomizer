@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
-const db = require('../index')
 
-const Member = db.define('members', {
+const Member = global.db.define('members', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
