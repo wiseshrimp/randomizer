@@ -5,64 +5,61 @@ const Member = db.sequelize.models.members
 
 const success = {response: 'success'}
 
-router.get('/', function (req, res, next) {
-  Member.findAll()
-  .then(function(members) {
-    res.status(200)
-    res.send({
-      data: members
+router
+  .get('/', function (req, res, next) {
+    Member.findAll()
+    .then(function(members) {
+      res.status(200)
+      res.send({
+        data: members
+      })
+      next()
     })
-    next()
+    .catch(err => {
+      console.log(err)
+    })
   })
-  .catch(err => {
-    console.log(err)
+  .delete('/', function (req, res, next) {
+    Member.destroy({
+      where: {
+        name: req.body.name
+      }
+    })
+    .then(response => {
+      res.send(success)
+      next()
+    })
+    .catch(err => {
+      console.log(err)
+    })
   })
-})
-
-router.delete('/', function (req, res, next) {
-  Member.destroy({
-    where: {
-      name: req.body.name
-    }
-  })
-  .then(response => {
-    res.send(success)
-    next()
-  })
-  .catch(err => {
-    console.log(err)
-  })
-})
-
-router.post('/', function (req, res) {
-  let { name, medium } = req.body
-  Member.build({
-    name,
-    medium
-  })
-  .save()
-  .catch(function (err) {
-    console.error(err)
-  })
-})
-
-router.put('/', function (req, res, next) {
-  let { name, medium } = req.body
-  Member.findOne({
-    where: { name }
-  })
-  .then(member => {
-    member.updateAttributes({
+  .post('/', function (req, res) {
+    let { name, medium } = req.body
+    Member.build({
+      name,
       medium
     })
-    res.send(success)
-    next()
+    .save()
+    .catch(function (err) {
+      console.error(err)
+    })
   })
-  .catch(err => {
-    console.log(err)
+  .put('/', function (req, res, next) {
+    let { name, medium } = req.body
+    Member.findOne({
+      where: { name }
+    })
+    .then(member => {
+      member.updateAttributes({
+        medium
+      })
+      res.send(success)
+      next()
+    })
+    .catch(err => {
+      console.log(err)
+    })
   })
-  
-})
 
 
 module.exports = router
