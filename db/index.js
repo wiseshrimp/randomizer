@@ -29,7 +29,19 @@ if (process.env.HEROKU_POSTGRESQL_COBALT_URL) {
 const db = global.db = {
   Sequelize: Sequelize,
   sequelize: sequelize,
-  User: sequelize.import(__dirname + '/models/Member')
+  Member: db.define('members', {
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    medium: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    updated_at: {
+      type: Sequelize.DATE
+    }
+  })
 }
 
 // const url = process.env.DATABASE_URL || `postgres://localhost:5432/${name}`
@@ -44,18 +56,18 @@ const db = global.db = {
 // })
 
 
-// const Member = db.define('members', {
-//   name: {
-//     type: Sequelize.STRING,
-//     allowNull: false
-//   },
-//   medium: {
-//     type: Sequelize.STRING,
-//     allowNull: false
-//   },
-//   updated_at: {
-//     type: Sequelize.DATE
-//   }
-// })
+const Member = db.define('members', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  medium: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  updated_at: {
+    type: Sequelize.DATE
+  }
+})
 
 module.exports = db
