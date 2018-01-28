@@ -7,27 +7,17 @@ const { Client } = require('pg')
 const dbName = 'pilates'
 const url = `postgres://localhost:5432/${dbName}`
 
-console.log(chalk.yellow(`Opening database connection to ${url}`));
+const url = process.env.DATABASE_URL || `postgres://localhost:5432/${name}`
 
-var db
+const db = new Sequelize(url, {
+  logging: debug,
+  define: {
+    underscored: true,
+    freezeTableName: true,
+    timestamps: true
+  }
+})
 
-if (process.env.DATABASE_URL) {
-  db = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    protocol: 'postgress',
-    logging: true
-  })
-} else {
-  db = new Sequelize(url, {
-    logging: debug,
-    native: true,
-    define: {
-      underscored: true,
-      freezeTableName: true,
-      timestamps: true
-    }
-  })
-}
 
 const Member = db.define('members', {
   name: {
