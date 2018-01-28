@@ -8,7 +8,7 @@ const Mediums = {
 }
 const MediumsArr = Object.values(Mediums)
 
-const usersPath = '/users'
+const membersPath = '/members'
 
 const headers = new Headers({
     'Content-Type': 'application/json'
@@ -16,15 +16,8 @@ const headers = new Headers({
 
 var data = null
 
-function arrToObj(dataArr) {
-    return dataArr.reduce((acc, cur, idx) => {
-        acc[idx] = cur
-        return acc
-    }, {})
-}
-
 function deletePerson(name) {
-    fetch(usersPath, {
+    fetch(membersPath, {
         method: 'delete',
         body: JSON.stringify({
             name
@@ -34,7 +27,7 @@ function deletePerson(name) {
 }
 
 function savePerson(method, name, medium) {
-    fetch(usersPath, {
+    fetch(membersPath, {
         method,
         body: JSON.stringify({
             name,
@@ -42,15 +35,13 @@ function savePerson(method, name, medium) {
         }),
         headers
     })
-    let dataArr = Object.values(data)
-    let newDataObj = Object.assign({}, data, {
-        [dataArr.length]: {
-            id: dataArr.length,
-            name,
-            medium
-        }
-    })
-    data = newDataObj
+
+    let newData = [...data, {
+        id: data.length,
+        name,
+        medium
+    }]
+    data = newData
 }
 
 function createDiv(classText) {
@@ -61,7 +52,7 @@ function createDiv(classText) {
 
 function createMediumOption(pName, pMedium) {
     let selectOption = document.createElement('select')
-    selectOption.addEventListener('change', onMediumChange, { passive: true })
+    selectOption.addEventListener('change', onMediumChange)
     selectOption.dataset.person = pName
     MediumsArr.forEach(medium => {
         let option = document.createElement('option')
@@ -74,10 +65,9 @@ function createMediumOption(pName, pMedium) {
 }
 
 function onMediumChange ({target}) {
-    let dataArr = Object.values(data)
     let name = target.dataset.person
     let medium = target.value
-    let idx = dataArr.findIndex(el => {
+    let idx = data.findIndex(el => {
         return el.name === name
     })
     if (data[idx].medium !== medium) {
@@ -98,6 +88,7 @@ function onAddPerson(ev) {
     let personDiv = createDiv('person')
     let nameDiv = createDiv('name')
     let deleteDiv = createDiv('delete')
+    personDiv.id = `person-${name}`
     nameDiv.innerText = name
     deleteDiv.innerText = 'x'
     deleteDiv.dataset.name = name
@@ -111,17 +102,15 @@ function onAddPerson(ev) {
 
 function onDeletePerson({ target }) {
     let { name } = target.dataset
-    let dataArr = Object.values(data)
     deletePerson(name)
     let personDiv = document.getElementById(`person-${name}`)
-    personDiv.parentNode.removeChild(personDiv)
-    let personIdx = dataArr.findIndex(el => {
+    personDiv.innerHTML = ''
+    let personIdx = data.findIndex(el => {
         return el.name === name
     })
-    let newDataArr = dataArr.slice()
-    newDataArr.splice(personIdx, 1)
-    let newDataObj = arrToObj(newDataArr)
-    data = newDataObj
+    let newData = data.slice()
+    newData.splice(personIdx, 1)
+    data = newData
 }
 
 function onCrackathonCreate(ev) {
@@ -153,10 +142,9 @@ function onCrackathonCreate(ev) {
 }
 
 function populate () {
-    let dataArr = Object.values(data)
     let dataDiv = document.getElementById('people-data')
 
-    dataArr.forEach(person => {
+    data.forEach(person => {
         let nameDiv = createDiv('name')
         let personDiv = createDiv('person')
         let selectOption = createMediumOption(person.name, person.medium)

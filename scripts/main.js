@@ -131,16 +131,12 @@ class Randomizer {
 //     isRepeated: false
 // })
 
-var hasChanged = false
-
 function fetchData () {
-    fetch('/users')
+    fetch('/members')
     .then(res => res.json())
-        .then(res => {
-        data = res
-        if (!hasChanged) {
-            populate()
-        }
+    .then(res => {
+        data = res.data
+        populate()
     })
 }
 
