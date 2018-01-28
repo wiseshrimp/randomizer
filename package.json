@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "start": "node ./server/app.js"
+    "start": "nodemon ./server/app.js"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

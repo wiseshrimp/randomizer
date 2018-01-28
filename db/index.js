@@ -16,7 +16,7 @@ if (process.env.HEROKU_POSTGRESQL_COBALT_URL) {
     logging: true
   })
 } else {
-  sequelize = new Sequelize(`postgres://localhost:5432/${name}`, {
+  sequelize = new Sequelize(`postgres://localhost:5432/${dbName}`, {
     logging: debug,
     define: {
       underscored: true,
@@ -25,11 +25,22 @@ if (process.env.HEROKU_POSTGRESQL_COBALT_URL) {
     }
   })
 }
-
+const Member = sequelize.define('members', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  medium: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  updated_at: {
+    type: Sequelize.DATE
+  }
+})
 const db = global.db = {
   Sequelize: Sequelize,
-  sequelize: sequelize,
-  members: sequelize.import(__dirname + '/models/Member')
+  sequelize: sequelize
 }
 
 // const url = process.env.DATABASE_URL || `postgres://localhost:5432/${name}`

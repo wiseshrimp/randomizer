@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
-
 const db = require('../../db')
-console.log(db)
-const Member = db.members
+const Member = db.sequelize.models.members
 
 const success = {response: 'success'}
 
