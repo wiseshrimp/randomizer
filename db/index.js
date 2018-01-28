@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const Promise = require('bluebird')
 
 const dbName = 'pilates'
-const url = `postgres://localhost:5432/${dbName}`
+const url = process.env.DATABASE_URL | `postgres://localhost:5432/${dbName}`
 
 console.log(chalk.yellow(`Opening database connection to ${url}`));
 
